@@ -6,7 +6,7 @@
 /*   By: yemoreno <yemoreno@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 22:43:58 by yemoreno          #+#    #+#             */
-/*   Updated: 2023/09/17 00:43:38 by yemoreno         ###   ########.fr       */
+/*   Updated: 2023/09/23 13:55:26 by yemoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,19 @@
 
 char	*ft_substr(const char *s, unsigned int start, size_t len)
 {
-	char		*tmp;
-	int			i;
+	char	*subst;
+	size_t	size;
 
-	i = 0;
-	if (start > ft_strlen(s))
-	{
-		tmp = ft_calloc(1, sizeof(char));
-		return (tmp);
-	}
-	else
-	{
-		if (len > ft_strlen(s))
-			tmp = ft_calloc(ft_strlen(s) + 1, sizeof(char));
-		else
-			tmp = ft_calloc(len + 1, sizeof(char));
-	}
-	if (!tmp)
+	if (!s)
 		return (NULL);
-	while (len-- != 0 && s[start + i] != '\0')
-	{
-		tmp[i] = s[start + i];
-		i++;
-	}
-	tmp[i] = '\0';
-	return (tmp);
+	if (start >= ft_strlen(s))
+		return (ft_strdup(""));
+	size = ft_strlen(s + start);
+	if (size < len)
+		len = size;
+	subst = (char *)malloc(sizeof(char) * (len + 1));
+	if (!subst)
+		return (NULL);
+	ft_strlcpy(subst, s + start, len + 1);
+	return (subst);
 }

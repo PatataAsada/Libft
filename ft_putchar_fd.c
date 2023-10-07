@@ -14,11 +14,5 @@
 
 void	ft_putchar_fd(char c, int fd)
 {
-	char	*arg;
-
-	arg = ft_calloc(1, sizeof(char));
-	arg[0] = c;
-	write(fd, arg, sizeof(char));
-	free(arg);
-	arg = NULL;
+	write(fd, &c, sizeof(char));
 }
