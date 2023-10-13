@@ -26,6 +26,11 @@ OBJECTS = $(SOURCES:.c=.o)
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
+BONUS			=	ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c \
+					ft_lstdelone.c ft_lstiter.c ft_lstlast.c \
+					ft_lstmap.c ft_lstnew.c ft_lstsize.c
+BONUS_OBJS		= $(BONUS:.c=.o)
+
 all: $(NAME)
 
 $(NAME): $(OBJECTS)
@@ -35,11 +40,14 @@ $(NAME): $(OBJECTS)
 	$(CC) -c $(CFLAGS) $?
 
 clean: #cleans objects
-	rm -f $(OBJECTS)
+	rm -f $(OBJECTS) $(BONUS_OBJS)
 
 fclean: clean #Cleans name
 	rm -f $(NAME)
 
 re: fclean all
+
+bonus: $(OBJECTS) $(BONUS_OBJS)
+	$(AR) - r $(NAME) $(OBJECTS) $(BONUS_OBJS)
 
 .PHONY: all bonus clean fclean re
